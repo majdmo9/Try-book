@@ -1,0 +1,83 @@
+.createPostContainer {
+  margin-top: 1vh;
+  width: 100%;
+  border: 1px solid #79b4b7;
+  border-radius: 8px;
+  background-color: #f1f0ee;
+}
+.createPostInput {
+  margin-top: 2vh;
+  border-bottom: 1px solid #79b4b7;
+  width: 100%;
+}
+.createPostInput fieldset {
+  border: none;
+}
+.buttonsDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 6vh;
+  border-bottom: 1px solid #79b4b7;
+}
+.buttonsDiv button {
+  margin-right: 0.5vw;
+  width: 14%;
+  height: 100%;
+  color: #f8f0df;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  font-size: 1vw;
+}
+.postImageDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vh;
+}
+.postImage {
+  object-fit: contain;
+}
+.inputLabel {
+  height: 100%;
+  width: 11%;
+  margin-left: 0.5vw;
+}
+.imageUploadButton {
+  color: #f8f0df;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+.imageUploadButton svg {
+  font-size: 1.5vw;
+}
+.createPostButton svg{
+  font-size: 1.5vw;
+}
+.inputLabel span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1vw;
+}
+.loadingDiv {
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loadingBar {
+  width: 99%;
+  height: 1vh;
+  border-radius: 8px;
+}
+.createPostTitle {
+  text-align: center;
+  margin-top: 0.5vh;
+  border-bottom: 1px solid #79b4b7;
+}

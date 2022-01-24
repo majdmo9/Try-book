@@ -1,0 +1,57 @@
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  background-color: #79b4b7;
+}
+.emailInput {
+  width: 60%;
+}
+.emailInput input {
+  color: #f8f0df;
+  font-size: 1.7vw;
+  -webkit-box-shadow: 0 0 0 100px#79b4b7 inset !important;
+  -webkit-text-fill-color: #f8f0df;
+}
+.passwordInput {
+  width: 60%;
+  margin-top: 1.5vh;
+}
+.passwordInput input {
+  color: #f8f0df;
+  font-size: 1.7vw;
+  -webkit-box-shadow: 0 0 0 100px#79b4b7 inset !important;
+  -webkit-text-fill-color: #f8f0df;
+}
+.loginBtn {
+  width: 18%;
+  margin-top: 1vh;
+  height: 6vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+.loginTitle {
+  font-size: 5vw;
+  color: #f8f0df;
+}
+.buttonsDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.buttonsRegisterDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.buttonsRegisterDiv button {
+  width: 22%;
+}
