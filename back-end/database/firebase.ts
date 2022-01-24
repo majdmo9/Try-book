@@ -1,6 +1,6 @@
 "use strict";
 const admin = require("firebase-admin");
-const serviceAccount = require("../trybook-f2afd-firebase-adminsdk-rvtnj-b726e37e6b.json");
+const serviceAccount = require("../admin/trybook-f2afd-firebase-adminsdk-rvtnj-b726e37e6b.json");
 import {
   getAuth,
   signInWithPopup,
