@@ -7,6 +7,7 @@ interface IProps {
   theme: any;
   children: any;
   logOut: () => void;
+  token: string | null;
 }
 const Layout: FunctionComponent<IProps & IUser> = ({
   theme,
@@ -15,6 +16,7 @@ const Layout: FunctionComponent<IProps & IUser> = ({
   name,
   picture,
   email,
+  token,
 }) => {
   return (
     <div className={styles.container}>
@@ -25,7 +27,7 @@ const Layout: FunctionComponent<IProps & IUser> = ({
         email={email}
         picture={picture}
       ></NavBar>
-      <SideBar theme={theme} />
+      <SideBar theme={theme} token={token} />
 
       <div className={styles.childrenDiv}>{children}</div>
     </div>

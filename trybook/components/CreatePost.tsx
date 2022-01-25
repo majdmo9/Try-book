@@ -67,25 +67,21 @@ const CreatePost: FunctionComponent<IUser & IProps> = ({
   };
   const handleCreatePostClick = async () => {
     if (postTitle) {
-      await axios
-        .post(firestoreUrl, post, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-        });
+      await axios.post(firestoreUrl, post, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setPostTitle("");
       setUrl("");
-    }
+    } else alert("Write something...");
   };
   useEffect(() => {
     if (url) setLoading(false);
   }, [url]);
   return (
     <div className={styles.createPostContainer}>
-      <Typography variant="h3" className={styles.createPostTitle}>
+      <Typography variant="h4" className={styles.createPostTitle}>
         Create Post
       </Typography>
       <TextField

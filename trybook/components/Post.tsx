@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { postType } from "./Posts";
+import { postType, commentObjectType, commentType } from "./Posts";
 import Image from "next/image";
 import styles from "../styles/Post.module.css";
 import TextField from "@mui/material/TextField";
@@ -8,6 +8,7 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import ScrollDialog from "./ScrollDialog";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 interface IProps {
   post: postType;
@@ -15,6 +16,7 @@ interface IProps {
   picture: string | StaticImageData;
   token: string | null;
 }
+
 const theme = createTheme({
   palette: {
     secondary: {
@@ -37,7 +39,13 @@ const Post: FunctionComponent<IProps> = ({ post, name, picture, token }) => {
   const [isReadmore, setIsReadmore] = useState<boolean>(false);
   const [isLikesOpened, setIsLikesOpened] = useState<boolean>(false);
   const [isCommentsOpened, setIsCommentsOpened] = useState<boolean>(false);
-  const [comment, setComment] = useState<string>("");
+  const [postComments, setPostComments] = useState<commentType[]>(
+    post.comments
+  );
+  const [comment, setComment] = useState<commentObjectType>({
+    content: "",
+    id: "",
+  });
   const [IsPostLiked, setIsPostLiked] = useState<boolean>(false);
   const url = "http://localhost:4000/";
 
@@ -98,10 +106,13 @@ const Post: FunctionComponent<IProps> = ({ post, name, picture, token }) => {
     setIsPostLiked(false);
   };
   const handleCommentChange = (e: any) => {
-    setComment(e.target.value);
+    if (!comment.id) {
+      setComment({ ...comment, content: e.target.value, id: uuidv4() });
+    } else setComment({ ...comment, content: e.target.value });
   };
   const handleAddComment = () => {
     post.comments.push({ comment, user: { name, image: picture } });
+
     axios
       .post(
         url + "commentpost",
@@ -116,9 +127,10 @@ const Post: FunctionComponent<IProps> = ({ post, name, picture, token }) => {
         }
       )
       .then(() => {
-        setComment("");
+        setComment({ content: "", id: "" });
       });
   };
+
   return (
     <ThemeProvider theme={theme}>
       <div className={styles.postDiv}>
@@ -150,7 +162,7 @@ const Post: FunctionComponent<IProps> = ({ post, name, picture, token }) => {
           }
           alt="post-image"
           width="450vw"
-          height={post?.image ? "400vh" : "0"}
+          height={post?.image ? "450vh" : "0"}
         />
         <div className={styles.howManyLikesAndCommentsDiv}>
           <Button variant="text" onClick={handleLikeButtonClick}>
@@ -161,7 +173,11 @@ const Post: FunctionComponent<IProps> = ({ post, name, picture, token }) => {
               open={isLikesOpened}
               setOpen={setIsLikesOpened}
               likes={post.likes}
+              setPostComments={setPostComments}
               comments={[]}
+              token={token}
+              postId={post.id}
+              name={name}
             />
           )}
           <Button
@@ -170,14 +186,18 @@ const Post: FunctionComponent<IProps> = ({ post, name, picture, token }) => {
               setIsCommentsOpened(true);
             }}
           >
-            {post.comments.length} comments
+            {postComments.length} comments
           </Button>
           {isCommentsOpened && post.comments.length !== 0 && (
             <ScrollDialog
               open={isCommentsOpened}
               setOpen={setIsCommentsOpened}
               likes={[]}
-              comments={post.comments}
+              comments={postComments}
+              token={token}
+              postId={post.id}
+              setPostComments={setPostComments}
+              name={name}
             />
           )}
         </div>
@@ -204,7 +224,7 @@ const Post: FunctionComponent<IProps> = ({ post, name, picture, token }) => {
               id="outlined-basic"
               label="Comment..."
               variant="outlined"
-              value={comment}
+              value={comment.content}
               autoComplete="off"
               className={styles.commentInput}
               onChange={handleCommentChange}

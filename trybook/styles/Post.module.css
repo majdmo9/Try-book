@@ -3,21 +3,22 @@
   display: flex;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+  object-fit: cover;
 }
 .postDiv {
   display: flex;
   flex-direction: column;
   margin: auto;
   align-items: center;
-  width: 100%;
+  width: 90%;
   margin-bottom: 2vh;
   margin-top: 2vh;
   border: 1px solid #79b4b7;
-  background-color: #f1f0ee;
+  background-color: #f1f7f7;
   border-radius: 5px;
 }
 .postTitle {
-  font-size: 1.1vw;
+  font-size: 1.2vw;
   margin-right: auto;
   margin-left: 1vw;
 }

@@ -6,12 +6,17 @@ import axios from "axios";
 import styles from "../styles/Posts.module.css";
 import CreatePost from "./CreatePost";
 import userImage from "../images/user-image.png";
+import { CircularProgress } from "@mui/material";
 export interface userInfo {
   name: string;
   image: StaticImageData | string;
 }
+export interface commentObjectType {
+  content: string;
+  id: string;
+}
 export interface commentType {
-  comment: string;
+  comment: commentObjectType;
   user: userInfo;
 }
 export interface postType {
@@ -40,6 +45,7 @@ const theme = createTheme({
 const url = "http://localhost:4000/";
 const Posts: FunctionComponent = () => {
   const [token, setToken] = useState<string | null>("");
+  const [loading, setLoading] = useState<boolean>(true);
   const [user, setUser] = useState<IUser>({
     name: "",
     email: "",
@@ -81,31 +87,39 @@ const Posts: FunctionComponent = () => {
   };
   useEffect(() => {
     if (user.picture !== "") {
+      setLoading(true);
       getAllPosts();
+      setLoading(false);
     }
   }, [user]);
 
   return (
     <div className={styles.postsContainer}>
-      <ThemeProvider theme={theme}>
-        {user.name !== "" && (
-          <CreatePost
-            name={user && user?.name}
-            picture={user && user?.picture}
-            email={user && user?.email}
-            token={token}
-          />
-        )}
-      </ThemeProvider>
-      {posts.map((post, i) => (
-        <Post
-          key={i}
-          post={post}
-          name={user.name}
-          picture={user.picture}
-          token={token}
-        />
-      ))}
+      {loading ? (
+        <CircularProgress className={styles.loading} color="secondary" />
+      ) : (
+        <div className={styles.pageContainer}>
+          <ThemeProvider theme={theme}>
+            {user.name !== "" && (
+              <CreatePost
+                name={user && user?.name}
+                picture={user && user?.picture}
+                email={user && user?.email}
+                token={token}
+              />
+            )}
+          </ThemeProvider>
+          {posts.map((post, i) => (
+            <Post
+              key={i}
+              post={post}
+              name={user.name}
+              picture={user.picture}
+              token={token}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

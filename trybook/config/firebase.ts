@@ -77,6 +77,7 @@ export const firebaseRegisterWithEmailAndPassword = (
 ) => {
   const { username, password, verify } = user;
   if (password === verify) {
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(username, password)
@@ -94,6 +95,7 @@ export const firebaseRegisterWithEmailAndPassword = (
 export const getLoggedInUser = (setIsLoggedIn: () => void) => {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
+
       setIsLoggedIn();
       window.localStorage.setItem("auth", "true");
       user.getIdToken().then((token) => {

@@ -19,17 +19,20 @@
 }
 
 .comment {
+  font-size: 1.3vw;
   display: flex;
   margin-bottom: 2vh;
-  width: 50%;
+  margin-top: 2vh;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   font-weight: 550;
   border: 1px solid #f1f0ee;
   background-color: #f1f0ee;
   border-radius: 10px;
-  margin-left: 2vw;
-  height: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+  height: 8vh;
 }
 .imageDiv {
   margin-left: 1vw;
@@ -43,7 +46,14 @@
   overflow: hidden;
   object-fit: cover;
 }
+
 .dialogContainer div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dialogContainer div div {
   width: 100%;
 }
 .commentsContainer {
@@ -78,8 +88,20 @@
   margin-left: 6.5%;
   margin-top: auto;
   margin-bottom: auto;
-  width: 50%;
+  width: 100%;
   border-top: none;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+}
+.buttonsDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.buttonsDiv button {
+  margin: auto;
+}
+.buttonsDiv svg {
+  font-size: 2vw;
 }

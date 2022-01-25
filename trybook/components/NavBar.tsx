@@ -22,12 +22,16 @@ const NavBar: FunctionComponent<IProps & IUser> = ({
     <div>
       <Box
         sx={{
+          top: "0",
+          zIndex: "11",
+          width: "100%",
+          position: "fixed",
           display: "flex",
           color: theme.palette.primary.main,
           backgroundColor: theme.palette.secondary.main,
           justifyContent: "space-between",
           alignItems: "center",
-          borderBottom: `2px solid ${theme.palette.secondary.light}`,
+          height: "10%",
         }}
       >
         <div className={styles.logo}>
@@ -42,6 +46,7 @@ const NavBar: FunctionComponent<IProps & IUser> = ({
                   id="outlined-basic"
                   label="Search"
                   variant="outlined"
+                  autoComplete="off"
                   className={styles.searchBar}
                 />
               </div>

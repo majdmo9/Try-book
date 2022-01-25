@@ -5,12 +5,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState, useEffect } from "react";
 import Login from "../components/Login";
 import axios from "axios";
+
 import userImage from "../images/user-image.png";
 const theme = createTheme({
   palette: {
     secondary: {
       main: "#79B4B7",
       light: "#F8F0DF",
+      contrastText:'#181818'
     },
     primary: {
       main: "#F8F0DF",
@@ -39,6 +41,18 @@ function MyApp({ Component, pageProps }: AppProps) {
   const logOut = () => {
     setIsLoggedIn(false);
   };
+  // save user data on Login
+  const setNewUserRequest = (User: IUser, uid: string) => {
+    axios.post(
+      url + "setnewuser",
+      { User, uid },
+      {
+        headers: {
+          authorization: "Bearer " + token,
+        },
+      }
+    );
+  };
   //Get user data after verify with token
   const getUser = async (token: string | null) => {
     const result = await axios.get(url + "getuser", {
@@ -48,10 +62,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
 
     if (result) {
-      let { name, picture, email } = result.data;
+      let { name, picture, email, uid } = result.data;
       if (picture === undefined) picture = userImage;
       if (name === undefined) name = email?.slice(0, email?.indexOf("@"));
       const User: IUser = { name, picture, email };
+      setNewUserRequest(User, uid);
       setUser(User);
     }
   };
@@ -69,6 +84,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         name={user.name}
         picture={user.picture}
         email={user.email}
+        token={token}
       >
         <Component {...pageProps} />
       </Layout>

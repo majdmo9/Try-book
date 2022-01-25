@@ -1,14 +1,22 @@
 .createPostContainer {
-  margin-top: 1vh;
-  width: 100%;
+  margin-top: 11%;
+  width: 90%;
   border: 1px solid #79b4b7;
-  border-radius: 8px;
-  background-color: #f1f0ee;
+  border-radius: 5px;
+  background-color: #f1f7f7;
+  margin-right: auto;
+  margin-left: auto;
 }
 .createPostInput {
   margin-top: 2vh;
   border-bottom: 1px solid #79b4b7;
   width: 100%;
+}
+.createPostInput input {
+  font-size: 2vw;
+}
+.createPostInput label {
+  font-size: 1.3vw;
 }
 .createPostInput fieldset {
   border: none;
@@ -56,7 +64,7 @@
 .imageUploadButton svg {
   font-size: 1.5vw;
 }
-.createPostButton svg{
+.createPostButton svg {
   font-size: 1.5vw;
 }
 .inputLabel span {
@@ -80,4 +88,5 @@
   text-align: center;
   margin-top: 0.5vh;
   border-bottom: 1px solid #79b4b7;
+  font-size: 3.5vw;
 }
