@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import middleware from "../middleware/index";
 import db from "../database/firebase";
 const cors = require("cors");
@@ -14,10 +14,15 @@ interface userInfo {
   name: string;
   image: string;
 }
+interface commentObjectType {
+  content: string;
+  id: string;
+}
 interface commentType {
-  comment: string;
+  comment: commentObjectType;
   user: userInfo;
 }
+
 interface postType {
   title: string;
   image: string;
@@ -121,6 +126,43 @@ app.get("/ispostliked", (req: Request, res: Response) => {
           res.send(true);
         } else res.send(false);
       }
+    });
+});
+// On delete comment
+app.put("/deletecomment", (req: Request, res: Response) => {
+  const { comments, postId } = req.body;
+  firestore
+    .collection("Posts")
+    .doc(postId)
+    .update({ comments: [...comments] });
+});
+// On comment edit
+app.put("/editcomment", (req: Request, res: Response) => {
+  const { comments, postId } = req.body;
+  firestore
+    .collection("Posts")
+    .doc(postId)
+    .update({
+      comments: [...comments],
+    });
+});
+// Save new user to firestore
+app.post("/setnewuser", (req: Request, res: Response) => {
+  const { User, uid } = req.body;
+  firestore.collection("Users").doc(uid).set(User);
+  res.send("User added successfully");
+});
+// get all users
+app.get("/getallusers", (req: Request, res: Response) => {
+  firestore
+    .collection("Users")
+    .get()
+    .then((querySnapshot: any) => {
+      let docsArray: any[] = [];
+      querySnapshot.forEach((doc: any) => {
+        docsArray.push(doc.data());
+      });
+      res.send(docsArray);
     });
 });
 app.listen(PORT, () => console.log(`App is up and running on port ${PORT}`));
